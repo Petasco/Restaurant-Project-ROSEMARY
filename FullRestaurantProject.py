@@ -23,6 +23,16 @@ class Login:
         frame_input = Frame(self.root, bg='white')
         frame_input.place(x=320, y=130, height=450, width=350)
 
+        TopFrame = Frame(LoginFrame, bd=8, relief=RAISED)
+        TopFrame.pack(side=TOP)
+
+        Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
+                          fg='Blue', width=53)
+        Title_lbl.grid(row=0, column=0)
+        mottolbl = Label(TopFrame, text='Customer Satisfaction Is Our Hallmark', fg='black',
+                         font=('Lucida calligraphy', 12, 'italic'))
+        mottolbl.grid(row=1, column=0)
+
         loginlbl = Label(frame_input, text='LOGIN', font=('impact', 30, 'bold'), fg='black', bg='white')
         loginlbl.place(x=120, y=20)
         usernamelbl = Label(frame_input, text='Username', font=('Goudy old style', 18, 'bold'), fg='orangered',
@@ -172,22 +182,33 @@ class Login:
             except Exception as es:
                 messagebox.showerror("Error", f"Error due to {str(es)}", parent=self.root)
 
+
+
     def managementSystem(self):
         try:
-            petasco = Tk()
-            petasco.geometry('1350x690+0+0')
-            petasco.config(bg='DarkOrange')
-            petasco.title('PETASCO RESTAURANT')
+            # petasco = Tk()
+            self.root.geometry('1366x700+0+0')
+            self.root.config(bg='DarkOrange')
+            self.root.title('By : PETASCO')
 
-            TopFrame = Frame(petasco, bd=10, relief=RAISED)
-            TopFrame.pack(side=TOP)
+            BlockTopFrame = Frame(self.root, bd=2, relief=SUNKEN)
+            BlockTopFrame.pack(side=TOP)
 
-            Title_lbl = Label(TopFrame, text='RESTAURANT MANAGEMENT SYSTEM', font=('arial', 30, 'bold'), bg='Orange',
-                              fg='Blue',
-                              width=55)
+            TopFrame = Frame(BlockTopFrame, bd=8, relief=RAISED)
+            TopFrame.pack(side=LEFT)
+
+            Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian',30), bg='Orange',
+                              fg='Blue',width=48)
             Title_lbl.grid(row=0, column=0)
+            mottolbl = Label(TopFrame,text='Customer Satisfaction Is Our Hallmark',fg='black',font=('Lucida calligraphy',12,'italic'))
+            mottolbl.grid(row=1,column=0)
 
-            menuFrame = Frame(petasco, bd=5, relief=RIDGE)
+            '''GalleryFrame = Frame(BlockTopFrame,bd=4,relief=SUNKEN)
+            GalleryFrame.pack(side=RIGHT)
+            GalleryBtn = Button(GalleryFrame,text='Gallery',font=('times new roman',13), cursor='hadn2',bg='orangered')
+            GalleryBtn.grid(row=0,column=0)'''
+
+            menuFrame = Frame(self.root, bd=5, relief=RIDGE)
             menuFrame.pack(side=LEFT)
 
             cost_ServiceFrame = Frame(menuFrame, bd=0, relief=RIDGE)
@@ -213,7 +234,7 @@ class Login:
             cakesFrame = LabelFrame(menuFrame, text='Cakes', font=('times', 20, 'bold italic'), bd=10, relief=RIDGE)
             cakesFrame.pack(side=LEFT)
 
-            rightSide = Frame(petasco, bd=15, relief=RIDGE)
+            rightSide = Frame(self.root, bd=15, relief=RIDGE)
             rightSide.pack()
 
             calFrame = Frame(rightSide, bd=2, relief=RIDGE)
@@ -1218,6 +1239,28 @@ class Login:
 
         except EXCEPTION as es:
             messagebox.showerror('Error',f'Error due to {str(es)}')
+
+    def gallery(self):
+
+        Frame_login = Frame(self.root, bg='#F0F8FF')
+        Frame_login.place(x=0, y=0, height=700, width=1366)
+
+        lbl1 = Label(Frame_login, text='Code With Petasco', font=('algerian', 20), fg='black', bg='white')
+        lbl1.place(x=375, y=100)
+        logoutbtn = Button(Frame_login, text='Logout->', command=self.loginform, cursor='hand2',
+                           font=('times new roman', 15), fg='white', bg='orangered',
+                           bd=0, width=15, height=1)
+        logoutbtn.place(x=1000, y=10)
+
+        self.img = ImageTk.PhotoImage(file='pple.jpg')
+        Label(Frame_login, image=self.img).place(x=50, y=0, height=200, width=300)
+        self.img1 = ImageTk.PhotoImage(file='Restaurant.jpg')
+        Label(Frame_login, image=self.img1).place(x=400, y=0, height=200, width=300)
+        self.img2 = ImageTk.PhotoImage(file='South-Africa-restaurants-level-1-Covid-19.jpg')
+        Label(Frame_login, image=self.img2).place(x=50, y=250, height=200, width=300)
+        self.img3 = ImageTk.PhotoImage(file='The-Most-Expensive-Restaurants-In-The-World.jpg')
+        Label(Frame_login, image=self.img3).place(x=400, y=250, height=200, width=300)
+
 
 root = Tk()
 ob = Login(root)
