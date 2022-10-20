@@ -23,7 +23,7 @@ class Login:
         frame_input = Frame(self.root, bg='white')
         frame_input.place(x=320, y=130, height=450, width=350)
 
-        TopFrame = Frame(LoginFrame, bd=8, relief=RAISED)
+        TopFrame = Frame(LoginFrame, bd=10, relief=RAISED)
         TopFrame.pack(side=TOP)
 
         Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
@@ -103,6 +103,16 @@ class Login:
 
         self.img = ImageTk.PhotoImage(file='en75-hero.jpg')
         Label(Frame_login1, image=self.img).place(x=0, y=0, height=700, width=1366)
+
+        TopFrame = Frame(Frame_login1, bd=10, relief=RAISED)
+        TopFrame.pack(side=TOP)
+
+        Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
+                          fg='Blue', width=53)
+        Title_lbl.grid(row=0, column=0)
+        mottolbl = Label(TopFrame, text='Customer Satisfaction Is Our Hallmark', fg='black',
+                         font=('Lucida calligraphy', 12, 'italic'))
+        mottolbl.grid(row=1, column=0)
 
         frame_input2 = Frame(self.root, bg='white')
         frame_input2.place(x=320, y=130, height=450, width=630)
@@ -188,28 +198,44 @@ class Login:
         try:
             # petasco = Tk()
             self.root.geometry('1366x700+0+0')
-            self.root.config(bg='DarkOrange')
+            #self.root.config(bg='DarkOrange')
             self.root.title('By : PETASCO')
+            msFrame = Frame(self.root,bg='white')
+            msFrame.place(x=0,y=0, width=1366, height=700)
 
-            BlockTopFrame = Frame(self.root, bd=2, relief=SUNKEN)
+            self.img = ImageTk.PhotoImage(file='en75-hero.jpg')
+            Label(msFrame, image=self.img).place(x=0, y=0, height=700, width=1366)
+            BlockTopFrame = Frame(msFrame, bd=0, relief=SUNKEN)
             BlockTopFrame.pack(side=TOP)
 
             TopFrame = Frame(BlockTopFrame, bd=8, relief=RAISED)
             TopFrame.pack(side=LEFT)
 
             Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian',30), bg='Orange',
-                              fg='Blue',width=48)
+                              fg='Blue',width=45)
             Title_lbl.grid(row=0, column=0)
             mottolbl = Label(TopFrame,text='Customer Satisfaction Is Our Hallmark',fg='black',font=('Lucida calligraphy',12,'italic'))
             mottolbl.grid(row=1,column=0)
 
-            '''GalleryFrame = Frame(BlockTopFrame,bd=4,relief=SUNKEN)
-            GalleryFrame.pack(side=RIGHT)
-            GalleryBtn = Button(GalleryFrame,text='Gallery',font=('times new roman',13), cursor='hadn2',bg='orangered')
-            GalleryBtn.grid(row=0,column=0)'''
+            '''GalleryFrame = Frame(msFrame,bd=4,relief=SUNKEN)
+            GalleryFrame.pack(side=LEFT)
+            GalleryBtn = Button(msFrame,text='Gallery',font=('times new roman',13), cursor='hadn2',bg='orangered',bd=1)
+            GalleryBtn.grid(row=0,column=1)'''
 
-            menuFrame = Frame(self.root, bd=5, relief=RIDGE)
+            menuFrame = Frame(msFrame, bd=5, relief=RIDGE)
             menuFrame.pack(side=LEFT)
+
+            rightSide = Frame(msFrame, bd=15, relief=RIDGE)
+            rightSide.pack(side=RIGHT)
+
+            calFrame = Frame(rightSide, bd=2, relief=RIDGE)
+            calFrame.pack(side=TOP)
+
+            receiptFrame = LabelFrame(rightSide, bd=5, text='Receipt', font=('arial', 15, 'bold italic'), relief=RIDGE)
+            receiptFrame.pack(side=TOP)
+
+            BtnFrame = Frame(rightSide, bd=4, relief=RIDGE)
+            BtnFrame.pack()
 
             cost_ServiceFrame = Frame(menuFrame, bd=0, relief=RIDGE)
             cost_ServiceFrame.pack(side=BOTTOM)
@@ -234,17 +260,7 @@ class Login:
             cakesFrame = LabelFrame(menuFrame, text='Cakes', font=('times', 20, 'bold italic'), bd=10, relief=RIDGE)
             cakesFrame.pack(side=LEFT)
 
-            rightSide = Frame(self.root, bd=15, relief=RIDGE)
-            rightSide.pack()
 
-            calFrame = Frame(rightSide, bd=2, relief=RIDGE)
-            calFrame.pack(side=TOP)
-
-            receiptFrame = LabelFrame(rightSide, bd=5, text='Receipt', font=('arial', 15, 'bold italic'), relief=RIDGE)
-            receiptFrame.pack()
-
-            BtnFrame = Frame(rightSide, bd=4, relief=RIDGE)
-            BtnFrame.pack()
 
             def send():
                 # os.system('KFC.py')
@@ -1114,25 +1130,24 @@ class Login:
                                textvariable=total)
             totalEntry.grid(row=3, column=4)
 
-            # ====================================== Buttons =======================================================================
+            # ====================================== Buttons ===========================================
             btnTotal = Button(costFrame, text='Total', font=('arial', 14, 'bold'), bd=2, width=10, command=total_cost)
             btnTotal.grid(row=0, column=0, columnspan=5, pady=10)
 
             btnSave = Button(BtnFrame, text='Save', font=('arial', 14, 'bold'), bd=3, width=7, command=save)
             btnSave.grid(row=0, column=2)
 
-            # from KFC import *
-            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7, command=send)
+            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7, command=gallery)
             btnSend.grid(row=0, column=3)
 
             btnReset = Button(BtnFrame, text='Reset', font=('arial', 14, 'bold'), bd=3, width=7, command=reset)
             btnReset.grid(row=0, column=4)
 
-            # ======================================Text Area ======================================================================
+            # ======================================Text Area =================================================
             txtReceipt = Text(receiptFrame, font=('times', 12, 'bold'), bd=3, width=45, height=14)
             txtReceipt.grid(row=0, column=0)
 
-            # ====================================================== Services ======================================================
+            # ====================================================== Services =================================
             Checkbutton(servicesFrame, text='Event Management', font=('tahoma', 8, 'bold'), bd=1, onvalue=1,
                         offvalue=0).grid(row=0, column=0, sticky=W)
             Checkbutton(servicesFrame, text='Hampers', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(
