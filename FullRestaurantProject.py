@@ -8,7 +8,7 @@ from tkinter import filedialog, messagebox
 class Login:
     def __init__(self, root):
         self.root = root
-        self.root.title("LOGIN & SIGN UP")
+        self.root.title("PETASCO")
         self.root.geometry('1366x700+0+0')
         self.root.resizable(False, False)
         self.loginform()
@@ -25,7 +25,7 @@ class Login:
         TopFrame = Frame(LoginFrame, bd=10, relief=RAISED)
         TopFrame.pack(side=TOP)
 
-        Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
+        Title_lbl = Label(TopFrame, text='PETASCO CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
                           fg='Blue', width=53)
         Title_lbl.grid(row=0, column=0)
         mottolbl = Label(TopFrame, text='Customer Satisfaction Is Our Hallmark', fg='black',
@@ -106,7 +106,7 @@ class Login:
         TopFrame = Frame(Frame_login1, bd=10, relief=RAISED)
         TopFrame.pack(side=TOP)
 
-        Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
+        Title_lbl = Label(TopFrame, text='PETASCO CAKES & CATERING SERVICES', font=('Algerian', 30), bg='Orange',
                           fg='Blue', width=53)
         Title_lbl.grid(row=0, column=0)
         mottolbl = Label(TopFrame, text='Customer Satisfaction Is Our Hallmark', fg='black',
@@ -208,7 +208,7 @@ class Login:
             TopFrame = Frame(BlockTopFrame, bd=8, relief=RAISED)
             TopFrame.pack(side=LEFT)
 
-            Title_lbl = Label(TopFrame, text='ROSEMARY CAKES & CATERING SERVICES', font=('Algerian',30), bg='Orange',
+            Title_lbl = Label(TopFrame, text='PETASCO CAKES & CATERING SERVICES', font=('Algerian',30), bg='Orange',
                               fg='Blue',width=45)
             Title_lbl.grid(row=0, column=0)
             mottolbl = Label(TopFrame,text='Customer Satisfaction Is Our Hallmark',fg='black',font=('Lucida calligraphy',12,'italic'))
@@ -347,110 +347,166 @@ class Login:
                     messagebox.showwarning("Error", f'Error due to {str(es)}!\nPlease Enter Only Integers!!!')
 
             def Receipt():
-                #global total, foodcost, drinkcost, cakescost
-                '''if total.get() == 0:
-                    messagebox.showerror('No Order', 'Please make an order to get a receipt!\n Thank You !!!')'''
-                try:
-                    txtReceipt.delete(1.0, END)
-                    x = random.randint(1000, 100000)
-                    billnumber = 'Bill : ' + str(x)
-                    date = time.strftime('%d/%m/%Y')
-                    txtReceipt.insert(END, 'Receipt Ref : \t\t' + billnumber + '\t\t' + date + '\n')
-                    txtReceipt.insert(END, '*********************************************\n')
-                    txtReceipt.insert(END, 'Items:\t\tCost (Ghc)\n')
-                    if foodcost.get() >= '1':
-                        txtReceipt.insert(END,
-                                          '-------------------------------- Food -------------------------------\n')
-                    if txtfufu.get() != '0':
-                        txtReceipt.insert(END, f'Fufu\t\t\t{int(txtfufu.get()) * 15}\n')
-                    if txtfrice.get() != '0':
-                        txtReceipt.insert(END, f'Fried Rice\t\t\t{int(txtfrice.get()) * 20}\n')
-                    if txtwaakye.get() != '0':
-                        txtReceipt.insert(END, f'Waakye\t\t\t{int(txtwaakye.get()) * 15}\n')
-                    if txtjollof.get() != '0':
-                        txtReceipt.insert(END, f'Jollof\t\t\t{int(txtjollof.get()) * 20}\n')
-                    if txtkonkonte.get() != '0':
-                        txtReceipt.insert(END, f'Konkonte\t\t\t{int(txtkonkonte.get()) * 10}\n')
-                    if txtbanku.get() != '0':
-                        txtReceipt.insert(END, f'Banku\t\t\t{int(txtbanku.get()) * 10}\n')
-                    if txtgob3.get() != '0':
-                        txtReceipt.insert(END, f'Gari & Beans\t\t\t{int(txtgob3.get()) * 15}\n')
-                    if txtkelewele.get() != '0':
-                        txtReceipt.insert(END, f'Kelewele\t\t\t{int(txtkelewele.get()) * 10}\n')
-                    if txtkenkey.get() != '0':
-                        txtReceipt.insert(END, f'Kenkey\t\t\t{int(txtkenkey.get()) * 10}\n')
-                    if txtyaw.get() != '0':
-                        txtReceipt.insert(END, f'Fried Yam\t\t\t{int(txtyaw.get()) * 10}\n')
-                    if txtriceball.get() != '0':
-                        txtReceipt.insert(END, f'Rice Ball\t\t\t{int(txtriceball.get()) * 10}\n')
 
-                    if drinkcost.get() >= '1':
-                        txtReceipt.insert(END,
-                                          '--------------------------------- Drinks ----------------------------\n')
-                    if txtcock.get() != '0':
-                        txtReceipt.insert(END, f'Cocktail\t\t\t{int(txtcock.get()) * 25}\n')
-                    if txtcoke.get() != '0':
-                        txtReceipt.insert(END, f'Coka Cola\t\t\t{int(txtcoke.get()) * 20}\n')
-                    if txtpepsi.get() != '0':
-                        txtReceipt.insert(END, f'Pepsi\t\t\t{int(txtpepsi.get()) * 10}\n')
-                    if txtorange.get() != '0':
-                        txtReceipt.insert(END, f'Orange Juice\t\t\t{int(txtorange.get()) * 20}\n')
-                    if txtdon.get() != '0':
-                        txtReceipt.insert(END, f'Don Simon\t\t\t{int(txtdon.get()) * 30}\n')
-                    if txtpineaple.get() != '0':
-                        txtReceipt.insert(END, f'Pineapple Juice\t\t\t{int(txtpineaple.get()) * 25}\n')
-                    if txtbeet.get() != '0':
-                        txtReceipt.insert(END, f'Beet Juice\t\t\t{int(txtbeet.get()) * 35}\n')
-                    if txttampico.get() != '0':
-                        txtReceipt.insert(END, f'Tampico\t\t\t{int(txttampico.get()) * 10}\n')
-                    if txtredwine.get() != '0':
-                        txtReceipt.insert(END, f'Red Wine\t\t\t{int(txtredwine.get()) * 50}\n')
-                    if txtlemon.get() != '0':
-                        txtReceipt.insert(END, f'Lemon Juice\t\t\t{int(txtlemon.get()) * 20}\n')
-                    if txtapple.get() != '0':
-                        txtReceipt.insert(END, f'Apple Juice\t\t\t{int(txtapple.get()) * 25}\n')
+                global total
+                global sum, priceofFood, priceofDrinks, priceofCakes
+                fufu = int(txtfufu.get())
+                frice = int(txtfrice.get())
+                waakye = int(txtwaakye.get())
+                jollof = int(txtjollof.get())
+                konkonte = int(txtkonkonte.get())
+                banku = int(txtbanku.get())
+                gob3 = int(txtgob3.get())
+                kelewele = int(txtkelewele.get())
+                riceball = int(txtriceball.get())
+                kenkey = int(txtkenkey.get())
+                yaw = int(txtyaw.get())
+                # ==========================================Drinks ==============================================
+                cock = int(txtcock.get())
+                coke = int(txtcoke.get())
+                pepsi = int(txtpepsi.get())
+                orange = int(txtorange.get())
+                don = int(txtdon.get())
+                pineaple = int(txtpineaple.get())
+                beet = int(txtbeet.get())
+                tampico = int(txttampico.get())
+                apple = int(txtapple.get())
+                redwine = int(txtredwine.get())
+                lemon = int(txtlemon.get())
+                # ==========================================Cakes ==============================================
+                cheese = int(txtcheese.get())
+                ice = int(txtice.get())
+                pizzza = int(txtpizzza.get())
+                choco = int(txtchoco.get())
+                vanilla = int(txtvanilla.get())
+                sponge = int(txtsponge.get())
+                banana = int(txtbanana.get())
+                red = int(txtred.get())
+                black = int(txtblack.get())
+                oreo = int(txtoreo.get())
+                blue = int(txtblue.get())
 
-                    if cakescost.get() >= '1':
-                        txtReceipt.insert(END, '---------------------------------- Cakes ---------------------------\n')
-                    if txtcheese.get() != '0':
-                        txtReceipt.insert(END, f'Cheese\t\t\t{int(txtcheese.get()) * 30}\n')
-                    if txtice.get() != '0':
-                        txtReceipt.insert(END, f'Ice Cream\t\t\t{int(txtice.get()) * 50}\n')
-                    if txtpizzza.get() != '0':
-                        txtReceipt.insert(END, f'Pizza\t\t\t{int(txtpizzza.get()) * 40}\n')
-                    if txtchoco.get() != '0':
-                        txtReceipt.insert(END, f'Chocolate\t\t\t{int(txtchoco.get()) * 25}\n')
-                    if txtvanilla.get() != '0':
-                        txtReceipt.insert(END, f'Vanilla\t\t\t{int(txtvanilla.get()) * 35}\n')
-                    if txtsponge.get() != '0':
-                        txtReceipt.insert(END, f'Sponge\t\t\t{int(txtsponge.get()) * 45}\n')
-                    if txtbanana.get() != '0':
-                        txtReceipt.insert(END, f'Banana\t\t\t{int(txtbanana.get()) * 30}\n')
-                    if txtred.get() != '0':
-                        txtReceipt.insert(END, f'Red Velvet\t\t\t{int(txtred.get()) * 35}\n')
-                    if txtoreo.get() != '0':
-                        txtReceipt.insert(END, f'Oreo\t\t\t{int(txtoreo.get()) * 30}\n')
-                    if txtblue.get() != '0':
-                        txtReceipt.insert(END, f'Blueberry\t\t\t{int(txtblue.get()) * 40}\n')
-                    if txtblack.get() != '0':
-                        txtReceipt.insert(END, f'Black Forest\t\t\t{int(txtblack.get()) * 45}\n')
+                # ===================== Buttons ==================================
 
-                    txtReceipt.insert(END, '*********************************************\n')
-                    if foodcost.get() != '0':
-                        txtReceipt.insert(END, f'Cost of Food\t\t\tGhc {priceofFood}\n')
-                    if drinkcost.get() != '0':
-                        txtReceipt.insert(END, f'Cost of Drinks\t\t\tGhc {priceofDrinks}\n')
-                    if cakescost.get() != '0':
-                        txtReceipt.insert(END, f'Cost of Cakes\t\t\tGhc {priceofCakes}\n')
-                    txtReceipt.insert(END, f'Sub Total\t\t\tGhc {sum}\n')
-                    txtReceipt.insert(END, f'Discount\t\t\tGhc {elavy}\n')
-                    txtReceipt.insert(END, '*********************************************\n')
-                    txtReceipt.insert(END, f'Total Bill\t\t\tGhc {Total}\n')
-                    txtReceipt.insert(END, '*********************************************\n')
+                priceofFood = float(
+                    (fufu * 15) + (frice * 20) + (waakye * 15) + (jollof * 20) + (konkonte * 10) + (banku * 10) + (
+                            gob3 * 15) + (kelewele * 10) + (kenkey * 10) + (yaw * 10) + (riceball * 10))
 
-                    txtReceipt.config(state='disabled')
-                except Exception as es:
-                    messagebox.showerror('Order Error!', f'Error due to {str(es)}')
+                priceofDrinks = float(
+                    (cock * 25) + (coke * 20) + (pepsi * 10) + (orange * 20) + (don * 30) + (pineaple * 25) + (
+                            beet * 35) + (tampico * 10) + (redwine * 50) + (apple * 25) + (lemon * 20))
+
+                priceofCakes = float(
+                    (cheese * 30) + (ice * 50) + (pizzza * 40) + (choco * 25) + (vanilla * 35) + (sponge * 45) + (
+                            banana * 30) + (red * 35) + (oreo * 30) + (blue * 40) + (black * 45))
+                sum = float(priceofCakes + priceofDrinks + priceofFood)
+
+                if priceofCakes == 0 and priceofFood == 0 and priceofDrinks == 0:
+                    messagebox.showerror("No Order", 'Please make an order to get a receipt !!!')
+
+                else:
+                    try:
+                        global total, foodcost, drinkcost, cakescost
+                        txtReceipt.delete(1.0, END)
+                        x = random.randint(1000, 100000)
+                        billnumber = 'Bill : ' + str(x)
+                        date = time.strftime('%d/%m/%Y')
+                        txtReceipt.insert(END, 'Receipt Ref : \t\t' + billnumber + '\t\t' + date + '\n')
+                        txtReceipt.insert(END, '*********************************************\n')
+                        txtReceipt.insert(END, 'Items:\t\tCost (Ghc)\n')
+                        if foodcost.get() >= '1':
+                            txtReceipt.insert(END,
+                                              '-------------------------------- Food -------------------------------\n')
+                        if txtfufu.get() != '0':
+                            txtReceipt.insert(END, f'Fufu\t\t\t{int(txtfufu.get()) * 15}\n')
+                        if txtfrice.get() != '0':
+                            txtReceipt.insert(END, f'Fried Rice\t\t\t{int(txtfrice.get()) * 20}\n')
+                        if txtwaakye.get() != '0':
+                            txtReceipt.insert(END, f'Waakye\t\t\t{int(txtwaakye.get()) * 15}\n')
+                        if txtjollof.get() != '0':
+                            txtReceipt.insert(END, f'Jollof\t\t\t{int(txtjollof.get()) * 20}\n')
+                        if txtkonkonte.get() != '0':
+                            txtReceipt.insert(END, f'Konkonte\t\t\t{int(txtkonkonte.get()) * 10}\n')
+                        if txtbanku.get() != '0':
+                            txtReceipt.insert(END, f'Banku\t\t\t{int(txtbanku.get()) * 10}\n')
+                        if txtgob3.get() != '0':
+                            txtReceipt.insert(END, f'Gari & Beans\t\t\t{int(txtgob3.get()) * 15}\n')
+                        if txtkelewele.get() != '0':
+                            txtReceipt.insert(END, f'Kelewele\t\t\t{int(txtkelewele.get()) * 10}\n')
+                        if txtkenkey.get() != '0':
+                            txtReceipt.insert(END, f'Kenkey\t\t\t{int(txtkenkey.get()) * 10}\n')
+                        if txtyaw.get() != '0':
+                            txtReceipt.insert(END, f'Fried Yam\t\t\t{int(txtyaw.get()) * 10}\n')
+                        if txtriceball.get() != '0':
+                            txtReceipt.insert(END, f'Rice Ball\t\t\t{int(txtriceball.get()) * 10}\n')
+
+                        if drinkcost.get() >= '1':
+                            txtReceipt.insert(END,
+                                              '--------------------------------- Drinks ----------------------------\n')
+                        if txtcock.get() != '0':
+                            txtReceipt.insert(END, f'Cocktail\t\t\t{int(txtcock.get()) * 25}\n')
+                        if txtcoke.get() != '0':
+                            txtReceipt.insert(END, f'Coka Cola\t\t\t{int(txtcoke.get()) * 20}\n')
+                        if txtpepsi.get() != '0':
+                            txtReceipt.insert(END, f'Pepsi\t\t\t{int(txtpepsi.get()) * 10}\n')
+                        if txtorange.get() != '0':
+                            txtReceipt.insert(END, f'Orange Juice\t\t\t{int(txtorange.get()) * 20}\n')
+                        if txtdon.get() != '0':
+                            txtReceipt.insert(END, f'Don Simon\t\t\t{int(txtdon.get()) * 30}\n')
+                        if txtpineaple.get() != '0':
+                            txtReceipt.insert(END, f'Pineapple Juice\t\t\t{int(txtpineaple.get()) * 25}\n')
+                        if txtbeet.get() != '0':
+                            txtReceipt.insert(END, f'Beet Juice\t\t\t{int(txtbeet.get()) * 35}\n')
+                        if txttampico.get() != '0':
+                            txtReceipt.insert(END, f'Tampico\t\t\t{int(txttampico.get()) * 10}\n')
+                        if txtredwine.get() != '0':
+                            txtReceipt.insert(END, f'Red Wine\t\t\t{int(txtredwine.get()) * 50}\n')
+                        if txtlemon.get() != '0':
+                            txtReceipt.insert(END, f'Lemon Juice\t\t\t{int(txtlemon.get()) * 20}\n')
+                        if txtapple.get() != '0':
+                            txtReceipt.insert(END, f'Apple Juice\t\t\t{int(txtapple.get()) * 25}\n')
+
+                        if cakescost.get() >= '1':
+                            txtReceipt.insert(END, '---------------------------------- Cakes ---------------------------\n')
+                        if txtcheese.get() != '0':
+                            txtReceipt.insert(END, f'Cheese\t\t\t{int(txtcheese.get()) * 30}\n')
+                        if txtice.get() != '0':
+                            txtReceipt.insert(END, f'Ice Cream\t\t\t{int(txtice.get()) * 50}\n')
+                        if txtpizzza.get() != '0':
+                            txtReceipt.insert(END, f'Pizza\t\t\t{int(txtpizzza.get()) * 40}\n')
+                        if txtchoco.get() != '0':
+                            txtReceipt.insert(END, f'Chocolate\t\t\t{int(txtchoco.get()) * 25}\n')
+                        if txtvanilla.get() != '0':
+                            txtReceipt.insert(END, f'Vanilla\t\t\t{int(txtvanilla.get()) * 35}\n')
+                        if txtsponge.get() != '0':
+                            txtReceipt.insert(END, f'Sponge\t\t\t{int(txtsponge.get()) * 45}\n')
+                        if txtbanana.get() != '0':
+                            txtReceipt.insert(END, f'Banana\t\t\t{int(txtbanana.get()) * 30}\n')
+                        if txtred.get() != '0':
+                            txtReceipt.insert(END, f'Red Velvet\t\t\t{int(txtred.get()) * 35}\n')
+                        if txtoreo.get() != '0':
+                            txtReceipt.insert(END, f'Oreo\t\t\t{int(txtoreo.get()) * 30}\n')
+                        if txtblue.get() != '0':
+                            txtReceipt.insert(END, f'Blueberry\t\t\t{int(txtblue.get()) * 40}\n')
+                        if txtblack.get() != '0':
+                            txtReceipt.insert(END, f'Black Forest\t\t\t{int(txtblack.get()) * 45}\n')
+
+                        txtReceipt.insert(END, '*********************************************\n')
+                        if foodcost.get() != '0':
+                            txtReceipt.insert(END, f'Cost of Food\t\t\tGhc {priceofFood}\n')
+                        if drinkcost.get() != '0':
+                            txtReceipt.insert(END, f'Cost of Drinks\t\t\tGhc {priceofDrinks}\n')
+                        if cakescost.get() != '0':
+                            txtReceipt.insert(END, f'Cost of Cakes\t\t\tGhc {priceofCakes}\n')
+                        txtReceipt.insert(END, f'Sub Total\t\t\tGhc {sum}\n')
+                        txtReceipt.insert(END, f'Discount\t\t\tGhc {elavy}\n')
+                        txtReceipt.insert(END, '*********************************************\n')
+                        txtReceipt.insert(END, f'Total Bill\t\t\tGhc {Total}\n')
+                        txtReceipt.insert(END, '*********************************************\n')
+
+                        txtReceipt.config(state='disabled')
+                    except Exception as es:
+                        messagebox.showerror('Order Error!', f'Error due to {str(es)}')
 
             btnReceipt = Button(BtnFrame, text='Receipt', font=('arial', 14, 'bold'), bd=3, command=Receipt)
             btnReceipt.grid(row=0, column=1)
