@@ -1,10 +1,9 @@
 from tkinter import *
 import pymysql
-from PIL import Image, ImageTk
+from PIL import ImageTk
 import random
 import time
 from tkinter import filedialog, messagebox
-import tkinter as tk
 
 class Login:
     def __init__(self, root):
@@ -66,7 +65,7 @@ class Login:
         loginbtn.place(x=90, y=340)
 
         btn1 = Button(frame_input, text='Forget Password?', cursor='hand2', font=('calibri', 10), bg='white',
-                      fg='black', bd=0)
+                      fg='black', bd=0,command=self.gallery)
         btn1.place(x=125, y=305)
 
         signupbtn = Button(frame_input, text='New Here? Sign Up', command=self.Register, font=('calibri', 10),
@@ -192,19 +191,17 @@ class Login:
             except Exception as es:
                 messagebox.showerror("Error", f"Error due to {str(es)}", parent=self.root)
 
-
-
     def managementSystem(self):
         try:
             # petasco = Tk()
-            self.root.geometry('1366x700+0+0')
+            self.root.geometry('1366x730+0+0')
             #self.root.config(bg='DarkOrange')
             self.root.title('By : PETASCO')
             msFrame = Frame(self.root,bg='white')
-            msFrame.place(x=0,y=0, width=1366, height=700)
+            msFrame.place(x=0,y=0, width=1366, height=730)
 
             self.img = ImageTk.PhotoImage(file='en75-hero.jpg')
-            Label(msFrame, image=self.img).place(x=0, y=0, height=700, width=1366)
+            Label(msFrame, image=self.img).place(x=0, y=0, height=730, width=1366)
             BlockTopFrame = Frame(msFrame, bd=0, relief=SUNKEN)
             BlockTopFrame.pack(side=TOP)
 
@@ -217,10 +214,14 @@ class Login:
             mottolbl = Label(TopFrame,text='Customer Satisfaction Is Our Hallmark',fg='black',font=('Lucida calligraphy',12,'italic'))
             mottolbl.grid(row=1,column=0)
 
-            '''GalleryFrame = Frame(msFrame,bd=4,relief=SUNKEN)
+            GalleryFrame = Frame(BlockTopFrame,bd=4,relief=SUNKEN)
             GalleryFrame.pack(side=LEFT)
-            GalleryBtn = Button(msFrame,text='Gallery',font=('times new roman',13), cursor='hadn2',bg='orangered',bd=1)
-            GalleryBtn.grid(row=0,column=1)'''
+            GalleryBtn = Button(GalleryFrame,text='Gallery',font=('Lucida Sans',13,'bold'), bg='orange',cursor='hand2',bd=4,width=10,relief=RAISED,command=self.gallery)
+            GalleryBtn.grid(row=0,column=1,padx=10)
+
+
+            LogoutBtn = Button(GalleryFrame, text='Logout =>', font=('Lucida Sans', 13,'bold'), bg='orange',cursor='hand2',bd=4, width=10,relief=RAISED,command=self.loginform)
+            LogoutBtn.grid(row=1, column=1, padx=10)
 
             menuFrame = Frame(msFrame, bd=5, relief=RIDGE)
             menuFrame.pack(side=LEFT)
@@ -346,9 +347,9 @@ class Login:
                     messagebox.showwarning("Error", f'Error due to {str(es)}!\nPlease Enter Only Integers!!!')
 
             def Receipt():
-                global total, foodcost, drinkcost, cakescost
-                if total.get() == 0:
-                    messagebox.showerror('No Order', 'Please make an order to get a receipt!\n Thank You !!!')
+                #global total, foodcost, drinkcost, cakescost
+                '''if total.get() == 0:
+                    messagebox.showerror('No Order', 'Please make an order to get a receipt!\n Thank You !!!')'''
                 try:
                     txtReceipt.delete(1.0, END)
                     x = random.randint(1000, 100000)
@@ -379,7 +380,7 @@ class Login:
                     if txtkenkey.get() != '0':
                         txtReceipt.insert(END, f'Kenkey\t\t\t{int(txtkenkey.get()) * 10}\n')
                     if txtyaw.get() != '0':
-                        txtReceipt.insert(END, f'Fried Yaw\t\t\t{int(txtyaw.get()) * 10}\n')
+                        txtReceipt.insert(END, f'Fried Yam\t\t\t{int(txtyaw.get()) * 10}\n')
                     if txtriceball.get() != '0':
                         txtReceipt.insert(END, f'Rice Ball\t\t\t{int(txtriceball.get()) * 10}\n')
 
@@ -443,7 +444,8 @@ class Login:
                         txtReceipt.insert(END, f'Cost of Cakes\t\t\tGhc {priceofCakes}\n')
                     txtReceipt.insert(END, f'Sub Total\t\t\tGhc {sum}\n')
                     txtReceipt.insert(END, f'Discount\t\t\tGhc {elavy}\n')
-                    txtReceipt.insert(END, f'Total\t\t\tGhc {Total}\n')
+                    txtReceipt.insert(END, '*********************************************\n')
+                    txtReceipt.insert(END, f'Total Bill\t\t\tGhc {Total}\n')
                     txtReceipt.insert(END, '*********************************************\n')
 
                     txtReceipt.config(state='disabled')
@@ -601,9 +603,9 @@ class Login:
             Kenkey = Checkbutton(foodFrame, text='Kenkey\t\tGhc 10', font=('times', 15, 'bold'), onvalue=1, offvalue=0,
                                  variable=kenkeyvar, command=kenkeyfxn)
             Kenkey.grid(row=8, column=0, sticky=W)
-            Yaw = Checkbutton(foodFrame, text='Fried Yaw\tGhc 10', font=('times', 15, 'bold'), onvalue=1, offvalue=0,
+            Yam = Checkbutton(foodFrame, text='Fried Yam\tGhc 10', font=('times', 15, 'bold'), onvalue=1, offvalue=0,
                               variable=yawvar, command=yawfxn)
-            Yaw.grid(row=9, column=0, sticky=W)
+            Yam.grid(row=9, column=0, sticky=W)
 
             # ======================================= Entry ========================================================================
             # ----------------------------------------- Variables -------------------------------------------------------------------
@@ -1113,18 +1115,18 @@ class Login:
                                    textvariable=cakescost)
             cakescostEntry.grid(row=3, column=1)
 
-            subtotallbl = Label(costFrame, text='Sub Total', font=('arial', 16, 'bold'), fg='blue')
+            subtotallbl = Label(costFrame, text='Total', font=('arial', 16, 'bold'), fg='blue')
             subtotallbl.grid(row=1, column=3, sticky=W)
             subtotalEntry = Entry(costFrame, font=('arial', 15, 'bold'), bd=5, width=15, state='readonly',
                                   textvariable=subtotal)
             subtotalEntry.grid(row=1, column=4)
 
-            taxlbl = Label(costFrame, text='Services Tax', font=('arial', 16, 'bold'), fg='blue')
+            taxlbl = Label(costFrame, text='Discount', font=('arial', 16, 'bold'), fg='blue')
             taxlbl.grid(row=2, column=3, sticky=W)
             taxEntry = Entry(costFrame, font=('arial', 15, 'bold'), bd=5, width=15, state='readonly', textvariable=tax)
             taxEntry.grid(row=2, column=4)
 
-            totallbl = Label(costFrame, text='Total', font=('arial', 16, 'bold'), fg='blue')
+            totallbl = Label(costFrame, text='Total Bill', font=('arial', 16, 'bold'), fg='blue')
             totallbl.grid(row=3, column=3, sticky=W)
             totalEntry = Entry(costFrame, font=('arial', 15, 'bold'), bd=5, width=15, state='readonly',
                                textvariable=total)
@@ -1132,12 +1134,12 @@ class Login:
 
             # ====================================== Buttons ===========================================
             btnTotal = Button(costFrame, text='Total', font=('arial', 14, 'bold'), bd=2, width=10, command=total_cost)
-            btnTotal.grid(row=0, column=0, columnspan=5, pady=10)
+            btnTotal.grid(row=0, column=0, columnspan=5, pady=7)
 
             btnSave = Button(BtnFrame, text='Save', font=('arial', 14, 'bold'), bd=3, width=7, command=save)
             btnSave.grid(row=0, column=2)
 
-            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7, command=gallery)
+            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7)
             btnSend.grid(row=0, column=3)
 
             btnReset = Button(BtnFrame, text='Reset', font=('arial', 14, 'bold'), bd=3, width=7, command=reset)
@@ -1181,9 +1183,11 @@ class Login:
 
             def buttonClick(numbers):
                 global operator
+                operator = ''
                 operator = operator + numbers
                 calculatorFeild.delete(0, END)
                 calculatorFeild.insert(END, operator)
+
 
             def clear():
                 global operator
@@ -1252,7 +1256,7 @@ class Login:
 
 
 
-        except EXCEPTION as es:
+        except Exception as es:
             messagebox.showerror('Error',f'Error due to {str(es)}')
 
     def gallery(self):
@@ -1260,21 +1264,212 @@ class Login:
         Frame_login = Frame(self.root, bg='#F0F8FF')
         Frame_login.place(x=0, y=0, height=700, width=1366)
 
-        lbl1 = Label(Frame_login, text='Code With Petasco', font=('algerian', 20), fg='black', bg='white')
-        lbl1.place(x=375, y=100)
         logoutbtn = Button(Frame_login, text='Logout->', command=self.loginform, cursor='hand2',
-                           font=('times new roman', 15), fg='white', bg='orangered',
-                           bd=0, width=15, height=1)
-        logoutbtn.place(x=1000, y=10)
+                           font=('times new roman', 15), fg='black', bg='orange',bd=2, width=15, height=1)
+        logoutbtn.grid(row=0,column=3)
 
-        self.img = ImageTk.PhotoImage(file='pple.jpg')
-        Label(Frame_login, image=self.img).place(x=50, y=0, height=200, width=300)
-        self.img1 = ImageTk.PhotoImage(file='Restaurant.jpg')
-        Label(Frame_login, image=self.img1).place(x=400, y=0, height=200, width=300)
-        self.img2 = ImageTk.PhotoImage(file='South-Africa-restaurants-level-1-Covid-19.jpg')
-        Label(Frame_login, image=self.img2).place(x=50, y=250, height=200, width=300)
-        self.img3 = ImageTk.PhotoImage(file='The-Most-Expensive-Restaurants-In-The-World.jpg')
-        Label(Frame_login, image=self.img3).place(x=400, y=250, height=200, width=300)
+        drinksbtn = Button(Frame_login, text='Drinks', command=self.drinksGallery, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        drinksbtn.grid(row=0, column=1)
+        cakesbtn = Button(Frame_login, text='Cakes', command=self.cakesGallery, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        cakesbtn.grid(row=0, column=2)
+        orderbtn = Button(Frame_login, text='Order Here', command=self.managementSystem, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        orderbtn.grid(row=0, column=0)
+        # ===================================== Row 1 =====================================================
+        self.img2 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\fufu.jpg')
+        Label(Frame_login, image=self.img2, height=200, width=315).grid(row=1, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Fufu Ghc 15', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=0, pady=10,
+                                                                                           padx=10)
+
+        self.img3 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\joloff.jpg')
+        Label(Frame_login, image=self.img3, height=200, width=315).grid(row=1, column=1, padx=10)
+        Label(Frame_login, text='Jollof Ghc 20', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=1, pady=10,
+                                                                                         padx=10)
+        self.img8 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\waakye.jpg')
+        Label(Frame_login, image=self.img8, height=200, width=315).grid(row=1, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Waakye Ghc 15', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=2, pady=10,
+                                                                                         padx=10)
+        self.img9 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\gob3.jpg')
+        Label(Frame_login, image=self.img9, height=200, width=315).grid(row=1, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Gari & Beans Ghc 15', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=3, pady=10,
+                                                                                           padx=10)
+        # ===================================== Row 2 =====================================================
+        self.img = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\kenkey.jpg')
+        Label(Frame_login, image=self.img,height=200, width=315).grid(row=2,column=0,pady=10,padx=10)
+        Label(Frame_login, text='Kenkey Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=0, pady=10,
+                                                                                         padx=10)
+        self.img1 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\konkonte.jpg')
+        Label(Frame_login, image=self.img1,height=200, width=315).grid(row=2,column=1,pady=10,padx=10)
+        Label(Frame_login, text='Konkonte Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=1, pady=10,
+                                                                                           padx=10)
+        self.img5 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\banku.jpg')
+        Label(Frame_login, image=self.img5, height=200, width=315).grid(row=2, column=2,pady=10,padx=10)
+        Label(Frame_login, text='Banku Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=2, pady=10,
+                                                                                           padx=10)
+        self.img6 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\riceball.jpg')
+        Label(Frame_login, image=self.img6, height=200, width=315).grid(row=2, column=3,pady=10,padx=10)
+        Label(Frame_login, text='Rice Ball Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=3, pady=10,
+                                                                                           padx=10)
+        # ===================================== Row 3 =====================================================
+        self.img7 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\kelewele.jpg')
+        Label(Frame_login, image=self.img7, height=200, width=315).grid(row=3, column=0,pady=10,padx=10)
+        Label(Frame_login, text='Kelewele Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=0, pady=10,
+                                                                                              padx=10)
+        self.img10 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\friedrice.jpg')
+        Label(Frame_login, image=self.img10, height=200, width=315).grid(row=3, column=1, pady=10, padx=10)
+        Label(Frame_login, text='Fried Rice Ghc 20', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=1, pady=10,
+                                                                                             padx=10)
+        self.img4 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\friedyam.jpg')
+        Label(Frame_login, image=self.img4, height=200, width=315).grid(row=3, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Fried Yam Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=2, pady=10,
+                                                                                             padx=10)
+        self.img11 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Food\chicken.jpg')
+        Label(Frame_login, image=self.img11, height=200, width=315).grid(row=3, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Chicken Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=3, pady=10,
+                                                                                             padx=10)
+
+
+    def drinksGallery(self):
+        Frame_login = Frame(self.root, bg='#F0F8FF')
+        Frame_login.place(x=0, y=0, height=700, width=1366)
+
+        logoutbtn = Button(Frame_login, text='Logout->', command=self.loginform, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        logoutbtn.grid(row=0, column=3)
+
+        foodbtn = Button(Frame_login, text='Food', command=self.gallery, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        foodbtn.grid(row=0, column=1)
+        cakesbtn = Button(Frame_login, text='Cakes', command=self.cakesGallery, cursor='hand2',
+                          font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        cakesbtn.grid(row=0, column=2)
+        orderbtn = Button(Frame_login, text='Order Here', command=self.managementSystem, cursor='hand2',
+                          font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        orderbtn.grid(row=0, column=0)
+        # ===================================== Row 1 =====================================================
+        self.img2 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\beet.jpg')
+        Label(Frame_login, image=self.img2, height=200, width=315).grid(row=1, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Beet Juice Ghc 35', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=0, pady=10,
+                                                                                             padx=10)
+
+        self.img3 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\pepsi.jpg')
+        Label(Frame_login, image=self.img3, height=200, width=315).grid(row=1, column=1, padx=10)
+        Label(Frame_login, text='Pepsi Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=1, pady=10,
+                                                                                               padx=10)
+        self.img8 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\cocktail.jpg')
+        Label(Frame_login, image=self.img8, height=200, width=315).grid(row=1, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Cocktail Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=2, pady=10,
+                                                                                               padx=10)
+        self.img9 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\coke.jpg')
+        Label(Frame_login, image=self.img9, height=200, width=315).grid(row=1, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Coka Cola Ghc 20', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=3, pady=10,
+                                                                                               padx=10)
+        # ===================================== Row 2 =====================================================
+        self.img = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\redwine.jpg')
+        Label(Frame_login, image=self.img, height=200, width=315).grid(row=2, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Red Wine Ghc 50', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=0, pady=10,
+                                                                                               padx=2)
+        self.img1 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\pineapple.jpg')
+        Label(Frame_login, image=self.img1, height=200, width=315).grid(row=2, column=1, pady=10, padx=10)
+        Label(Frame_login, text='Pineapple Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=1, pady=10,
+                                                                                               padx=10)
+        self.img5 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\dew.jpg')
+        Label(Frame_login, image=self.img5, height=200, width=315).grid(row=2, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Dew Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=2, pady=10,
+                                                                                              padx=10)
+        self.img6 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\tampico.jpg')
+        Label(Frame_login, image=self.img6, height=200, width=315).grid(row=2, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Tampico Ghc 10', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=3, pady=10,
+                                                                                              padx=10)
+        # ===================================== Row 3 =====================================================
+        self.img7 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\donsimon.jpg')
+        Label(Frame_login, image=self.img7, height=200, width=315).grid(row=3, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Don Simon Ghc 30', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=0, pady=10,
+                                                                                              padx=10)
+        self.img10 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\orange.jpg')
+        Label(Frame_login, image=self.img10, height=200, width=315).grid(row=3, column=1, pady=10, padx=10)
+        Label(Frame_login, text='Orange Ghc 20', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=1, pady=10,
+                                                                                              padx=10)
+        self.img4 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\apple.jpg')
+        Label(Frame_login, image=self.img4, height=200, width=315).grid(row=3, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Apple Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=2, pady=10,
+                                                                                              padx=10)
+        self.img11 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Drinks\lemon.jpg')
+        Label(Frame_login, image=self.img11, height=200, width=315).grid(row=3, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Lemon Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=3, pady=10,
+                                                                                              padx=10)
+
+
+    def cakesGallery(self):
+        Frame_login = Frame(self.root, bg='#F0F8FF')
+        Frame_login.place(x=0, y=0, height=700, width=1366)
+
+        logoutbtn = Button(Frame_login, text='Logout->', command=self.loginform, cursor='hand2',
+                           font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        logoutbtn.grid(row=0, column=3)
+
+        foodbtn = Button(Frame_login, text='Food', command=self.gallery, cursor='hand2',
+                         font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        foodbtn.grid(row=0, column=1)
+        drinksbtn = Button(Frame_login, text='Drinks', command=self.drinksGallery, cursor='hand2',
+                          font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        drinksbtn.grid(row=0, column=2)
+        orderbtn = Button(Frame_login, text='Order Here', command=self.managementSystem, cursor='hand2',
+                          font=('times new roman', 15), fg='black', bg='orange', bd=2, width=15, height=1)
+        orderbtn.grid(row=0, column=0)
+        # ===================================== Row 1 =====================================================
+        self.img2 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\cheese.jpg')
+        Label(Frame_login, image=self.img2, height=200, width=315).grid(row=1, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Cheese Ghc 30', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=0, pady=10,
+                                                                                          padx=10)
+        self.img8 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\pizza.jpg')
+        Label(Frame_login, image=self.img8, height=200, width=315).grid(row=1, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Pizza Ghc 40', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=2, pady=10,
+                                                                                           padx=10)
+        self.img3 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\icecream.jpg')
+        Label(Frame_login, image=self.img3, height=200, width=315).grid(row=1, column=1, padx=10)
+        Label(Frame_login, text='Ice Cream Ghc 50', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=1, pady=10,
+                                                                                           padx=10)
+        self.img9 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\chocolate.jpg')
+        Label(Frame_login, image=self.img9, height=200, width=315).grid(row=1, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Chocolate Ghc 25', font=('lato', 15, 'bold'), fg='red').grid(row=1, column=3, pady=10,
+                                                                                           padx=10)
+        # ===================================== Row 2 =====================================================
+        self.img = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\banana.jpg')
+        Label(Frame_login, image=self.img, height=200, width=315).grid(row=2, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Banana Ghc 30', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=0, pady=10,
+                                                                                           padx=10)
+        self.img1 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\sponge.jpg')
+        Label(Frame_login, image=self.img1, height=200, width=315).grid(row=2, column=1, pady=10, padx=10)
+        Label(Frame_login, text='Sponge Ghc 45', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=1, pady=10,
+                                                                                           padx=10)
+        self.img5 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\redvelet.jpg')
+        Label(Frame_login, image=self.img5, height=200, width=315).grid(row=2, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Red Velvet Ghc 35', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=2, pady=10,
+                                                                                           padx=10)
+        self.img6 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\vanilla.jpg')
+        Label(Frame_login, image=self.img6, height=200, width=315).grid(row=2, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Vanilla Ghc 35', font=('lato', 15, 'bold'), fg='red').grid(row=2, column=3, pady=10,
+                                                                                           padx=10)
+        # ===================================== Row 3 =====================================================
+        self.img7 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\oreo.jpg')
+        Label(Frame_login, image=self.img7, height=200, width=315).grid(row=3, column=0, pady=10, padx=10)
+        Label(Frame_login, text='Oreo Ghc 30', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=0, pady=10,
+                                                                                           padx=10)
+        self.img10 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\blueberry.jpg')
+        Label(Frame_login, image=self.img10, height=200, width=315).grid(row=3, column=1, pady=10, padx=10)
+        Label(Frame_login, text='Blueberry Ghc 40', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=1, pady=10,
+                                                                                           padx=10)
+        self.img4 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\blackforest.jpg')
+        Label(Frame_login, image=self.img4, height=200, width=315).grid(row=3, column=2, pady=10, padx=10)
+        Label(Frame_login, text='Black Forest Ghc 45', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=2, pady=10,
+                                                                                           padx=10)
+        self.img11 = ImageTk.PhotoImage(file=r'C:\Users\peter\PycharmProjects\Restaurant\Cakes\meatpie.jpg')
+        Label(Frame_login, image=self.img11, height=200, width=315).grid(row=3, column=3, pady=10, padx=10)
+        Label(Frame_login, text='Chicken Ghc 30', font=('lato', 15, 'bold'), fg='red').grid(row=3, column=3, pady=10,
+                                                                                           padx=10)
 
 
 root = Tk()
