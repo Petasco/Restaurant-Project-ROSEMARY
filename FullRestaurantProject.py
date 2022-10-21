@@ -1149,45 +1149,53 @@ class Login:
             txtReceipt = Text(receiptFrame, font=('times', 12, 'bold'), bd=3, width=45, height=14)
             txtReceipt.grid(row=0, column=0)
 
-            # ====================================================== Services =================================
-            Checkbutton(servicesFrame, text='Event Management', font=('tahoma', 8, 'bold'), bd=1, onvalue=1,
-                        offvalue=0).grid(row=0, column=0, sticky=W)
-            Checkbutton(servicesFrame, text='Hampers', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(
-                row=1, column=0, sticky=W)
+            # ====================================================== Services ======================================================
+            eventvar = IntVar()
+            hampersvar = IntVar()
+            trainingvar = IntVar()
+            Checkbutton(servicesFrame, text='Event Management', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=eventvar).grid(row=0, column=0, sticky=W)
+            Checkbutton(servicesFrame, text='Hampers', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=hampersvar).grid(row=1, column=0, sticky=W)
             Checkbutton(servicesFrame, text='Training in:\nCakes Descoration &\nPractical Cookery',
-                        font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(row=2, column=0, sticky=W)
+                        variable=trainingvar, font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(row=2,
+                                                                                                            column=0,
+                                                                                                            sticky=W)
 
             petascolbl = Label(servicesFrame, text='By Petasco 0547736844', font=('algeria', 9, 'bold italic'),
                                fg='blue')
             petascolbl.grid(row=6, column=0, sticky=W, pady=12)
             # ======================================================= Orders =======================================================
-            Checkbutton(ordersFrame, text='Local Dishes', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(
-                row=0, column=0, sticky=W)
-            Checkbutton(ordersFrame, text='Continetal Dishes', font=('tahoma', 8, 'bold'), bd=1, onvalue=1,
-                        offvalue=0).grid(row=1, column=0, sticky=W)
-            Checkbutton(ordersFrame, text='Lunch', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(row=2,
-                                                                                                                 column=0,
-                                                                                                                 sticky=W)
-            Checkbutton(ordersFrame, text='Dinner', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(row=3,
-                                                                                                                  column=0,
-                                                                                                                  sticky=W)
-            Checkbutton(ordersFrame, text='Wedding', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(
-                row=4, column=0, sticky=W)
-            Checkbutton(ordersFrame, text='Funneral', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0).grid(
-                row=5, column=0, sticky=W)
-            Checkbutton(ordersFrame, text='Office Delivery', font=('tahoma', 8, 'bold'), bd=1, onvalue=1,
-                        offvalue=0).grid(row=6, column=0, sticky=W)
+            localvar = IntVar()
+            contivar = IntVar()
+            lunchvar = IntVar()
+            dinnervar = IntVar()
+            wedvar = IntVar()
+            funvar = IntVar()
+            officevar = IntVar()
+            Checkbutton(ordersFrame, text='Local Dishes', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=localvar).grid(row=0, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Continetal Dishes', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=contivar).grid(row=1, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Lunch', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=lunchvar).grid(row=2, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Dinner', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=dinnervar).grid(row=3, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Wedding', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=wedvar).grid(row=4, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Funneral', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=funvar).grid(row=5, column=0, sticky=W)
+            Checkbutton(ordersFrame, text='Office Delivery', font=('tahoma', 8, 'bold'), bd=1, onvalue=1, offvalue=0,
+                        variable=officevar).grid(row=6, column=0, sticky=W)
 
             # ==================================================== Calculator ======================================================
             operator = ''
 
             def buttonClick(numbers):
                 global operator
-                operator = ''
                 operator = operator + numbers
                 calculatorFeild.delete(0, END)
                 calculatorFeild.insert(END, operator)
-
 
             def clear():
                 global operator
