@@ -5,6 +5,8 @@ import random
 import time
 from tkinter import filedialog, messagebox
 
+
+
 class Login:
     def __init__(self, root):
         self.root = root
@@ -268,7 +270,53 @@ class Login:
                 messagebox.showinfo('Wait', 'Coming soon!!!!')
 
             def reset():
-                messagebox.showinfo('Wait', 'Coming soon!!!!')
+                try:
+                    # food =================
+                    fufuEntry.delete(0,END)
+                    friceEntry.delete(0,END)
+                    waakyeEntry.delete(0,END)
+                    jollofEntry.delete(0,END)
+                    konkonteEntry.delete(0,END)
+                    bankuEntry.delete(0,END)
+                    gob3Entry.delete(0,END)
+                    keleweleEntry.delete(0,END)
+                    kenkeyEntry.delete(0,END)
+                    yawEntry.delete(0,END)
+                    riceballEntry.delete(0,END)
+                    # drinks =================
+                    cockEntry.delete(0,END)
+                    cokeEntry.delete(0,END)
+                    pepsiEntry.delete(0,END)
+                    orangeEntry.delete(0,END)
+                    donEntry.delete(0,END)
+                    pineapleEntry.delete(0,END)
+                    beetEntry.delete(0,END)
+                    tampicoEntry.delete(0,END)
+                    redwineEntry.delete(0,END)
+                    lemonEntry.delete(0,END)
+                    appleEntry.delete(0,END)
+                    #txtReceipt.delete(0,END)
+                    # totals ==================
+                    foodcostEntry.config(state='normal')
+                    foodcostEntry.delete(0,END)
+                    foodcostEntry.config(state='readonly')
+                    drinkscostEntry.config(state='normal')
+                    drinkscostEntry.delete(0,END)
+                    drinkscostEntry.config(state='readonly')
+                    cakescostEntry.config(state='normal')
+                    cakescostEntry.delete(0,END)
+                    cakescostEntry.config(state='readonly')
+                    subtotalEntry.config(state='normal')
+                    subtotalEntry.delete(0,END)
+                    subtotalEntry.config(state='readonly')
+                    taxEntry.config(state='normal')
+                    taxEntry.delete(0,END)
+                    taxEntry.config(state='readonly')
+                    totalEntry.config(state='normal')
+                    totalEntry.delete(0,END)
+                    totalEntry.config(state='readonly')
+                except Exception as es:
+                    messagebox.showerror('Error', f'Error due to {str(es)}!!!!')
 
             def save():
                 url = filedialog.asksaveasfile(mode='w', defaultextension='.txt')
@@ -1195,7 +1243,7 @@ class Login:
             btnSave = Button(BtnFrame, text='Save', font=('arial', 14, 'bold'), bd=3, width=7, command=save)
             btnSave.grid(row=0, column=2)
 
-            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7)
+            btnSend = Button(BtnFrame, text='Send', font=('arial', 14, 'bold'), bd=3, width=7,command=send)
             btnSend.grid(row=0, column=3)
 
             btnReset = Button(BtnFrame, text='Reset', font=('arial', 14, 'bold'), bd=3, width=7, command=reset)
@@ -1537,5 +1585,7 @@ class Login:
 
 
 root = Tk()
+icon = ImageTk.PhotoImage(file='petascologo.jpg')
+root.iconphoto(False,icon)
 ob = Login(root)
 root.mainloop()
